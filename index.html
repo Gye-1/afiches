@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro - Ruta del Arte</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <form id="registroForm">
+        <h1>Registro - Ruta del Arte</h1>
+        <p>Si eres artista, diseñador o creativo residente en Guayaquil (mayor de 16 años), participa en la creación del afiche oficial por el aniversario de Ruta Centro. Crea una obra original en formato A2 digital que capture la esencia de La Ruta Centro.</p>
+        <ul>
+            <li>Plazo máximo: 15 de marzo, 16h00.</li>
+            <li>El ganador se elegirá por votación popular.</li>
+            <li><b>Gana $200 de PREMIO</b></li>
+        </ul>
+        <h2>¡Inscríbete ya y deja tu huella en Guayaquil!</h2>
+
+        <label>
+            <input type="checkbox" required> Acepto los <a href="#">Términos y Condiciones</a>[cite: 35, 52].
+        </label>
+
+        <input type="text" name="nombres" placeholder="Nombres" required>
+        <input type="text" name="apellidoP" placeholder="Apellido Paterno" required>
+        <input type="text" name="apellidoM" placeholder="Apellido Materno" required>
+        <input type="text" name="cedula" id="cedula" placeholder="Número de Cédula" required>
+        
+        <select name="genero">
+            <option value="Selecciona">Selecciona tu género</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+            <option value="Otros">Otros</option>
+        </select>
+
+        <select name="etnia">
+            <option value="AutoDefinición Etnica">Seleccionta tu Autodefinición Étnica</option>
+            <option value="Mestizo">Mestizo</option>
+            <option value="Indigena">Indígena</option>
+            <option value="Afrodescendiente">Afrodescendiente</option>
+            <option value="Cholo">Cholo</option>
+            <option value="Blanco">Blanco</option>
+            <option value="Otro">Otro</option>
+        </select>
+
+        <label>Fecha de Nacimiento:</label>
+        <input type="date" name="fechaNac" required>
+
+        <h3>Ubicación de Domicilio</h3>
+        <div id="map" style="height: 300px;"></div>
+        <input type="hidden" name="lat" id="lat">
+        <input type="hidden" name="lng" id="lng">
+        <input type="text" name="aga" id="aga" placeholder="Zona AGA" readonly>
+
+        <h3>Estudios Realizados</h3>
+        <label>¿Ha realizado estudios de Diseño?</label>
+        <select name="estudios" id="estudios">
+            <option value="NO">No</option>
+            <option value="SI">Si</option>
+        </select>
+        <div id="seccionEstudios" style="display:none;">
+            <input type="text" name="instituto" placeholder="Nombre Instituto/Universidad">
+            <input type="url" name="webInstituto" placeholder="Página Web">
+        </div>
+
+        <h3>Archivos del Concurso</h3>
+        <input type="text" name="nombreObra" placeholder="Nombre de la Obra" required>
+        <textarea name="descripcionObra" maxlength="250" placeholder="Describe tu obra en 250 caracteres máximo"></textarea>
+        
+        <label>JPG (150 DPI - RGB):</label>
+        <input type="file" id="fileJpg" accept=".jpg,.jpeg" required>
+        
+        <label>Vector (Illustrator - CMYK):</label>
+        <input type="file" id="fileVector" accept=".ai" required>
+        
+        <label>Cédula (PDF):</label>
+        <input type="file" id="filePdf" accept=".pdf" required>
+        
+        <div id="containerProgreso" style="display:none; margin-top: 20px;">
+            <label>Enviando registro... <span id="porcentaje">0%</span></label>
+            <div style="width: 100%; background: #eee; border-radius: 5px;">
+                <div id="barra" style="width: 0%; height: 20px; background: #00AEEF; border-radius: 5px; transition: width 0.3s;"></div>
+            </div>
+        </div>
+
+        <button type="submit">Enviar Registro</button>
+        
+    </form>
+
+    <div id="modalTerminos" class="modal">
+        <div class="modal-content">
+            <h2>Términos y Condiciones</h2>
+            <div class="modal-body">
+                <p>Al participar en el concurso "Ruta del Arte", usted acepta:</p>
+                <ul>
+                    <li>El premio único para el ganador es de <b>$200</b>.</li>
+                    <li>Autoriza de forma total y gratuita al Municipio de Guayaquil el uso de su arte, incluyendo la facultad de realizar adecuaciones, modificaciones o ediciones para material publicitario y branding.</li>
+                    <li>Declara que la obra es original e inédita.</li>
+                </ul>
+            </div>
+            <button type="button" id="cerrarModal">He leído y acepto</button>
+        </div>
+    </div>
+
+    <div id="modalExito" class="modal">
+        <div class="modal-content">
+            <h2 style="color: #28a745;">✔ ¡Éxito!</h2>
+            <p>Su Registro ha sido enviado con éxito.</p>
+            <button type="button" id="cerrarExito" style="background-color: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Cerrar</button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-omnivore/0.3.4/leaflet-omnivore.min.js"></script>
+    <script src="javascript.js"></script>
+
+    
+</body>
+</html>

@@ -1,0 +1,187 @@
+/* Paleta de Colores:
+   Azul Marino: #002D62
+   Celeste: #00AEEF
+   Blanco: #FFFFFF
+   Gris Claro: #F4F7F9
+*/
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #F4F7F9;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    margin: 0;
+}
+
+#registroForm {
+    background-color: #ffffff;
+    max-width: 700px;
+    width: 100%;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 45, 98, 0.1);
+    border-top: 8px solid #002D62; /* Detalle en Azul Marino */
+}
+
+h2 {
+    color: #002D62;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #00AEEF; /* Línea Celeste */
+    padding-bottom: 10px;
+}
+
+h3 {
+    color: #002D62;
+    margin-top: 30px;
+    border-left: 5px solid #00AEEF;
+    padding-left: 10px;
+    font-size: 1.2rem;
+}
+
+/* Estilo de los inputs y selects */
+input[type="text"],
+input[type="date"],
+input[type="url"],
+input[type="email"],
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho */
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #00AEEF; /* Cambio a celeste al enfocar */
+    box-shadow: 0 0 5px rgba(0, 174, 239, 0.3);
+}
+
+/* Estilo para el mapa */
+#map {
+    border: 2px solid #002D62;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* Inputs de tipo archivo */
+input[type="file"] {
+    display: block;
+    margin: 10px 0 20px 0;
+    color: #002D62;
+}
+
+/* Etiquetas (Labels) */
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 15px;
+    color: #444;
+}
+
+/* Checkbox y términos */
+label input[type="checkbox"] {
+    display: inline-block;
+    width: auto;
+    margin-right: 10px;
+}
+
+a {
+    color: #00AEEF;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Botón de envío */
+button[type="submit"] {
+    width: 100%;
+    background-color: #002D62; /* Azul Marino */
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+    text-transform: uppercase;
+}
+
+button[type="submit"]:hover {
+    background-color: #00AEEF; /* Cambia a Celeste al pasar el mouse */
+}
+
+button[type="submit"]:active {
+    transform: scale(0.98);
+}
+
+/* Secciones dinámicas */
+#seccionEstudios {
+    background-color: #eef9ff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Ajustes para dispositivos móviles */
+@media (max-width: 600px) {
+    #registroForm {
+        padding: 20px;
+    }
+}
+
+/* Estilos para el Modal */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.modal-body {
+    text-align: left;
+    margin: 20px 0;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Estado deshabilitado */
+input:disabled, select:disabled, textarea:disabled, button:disabled {
+    background-color: #eee !important;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+#cerrarModal {
+    background-color: #002D62;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
