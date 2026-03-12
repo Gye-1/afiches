@@ -32,8 +32,9 @@ map.on('click', (e) => actualizarUbicacion(e.latlng));
 marker.on('dragend', () => actualizarUbicacion(marker.getLatLng()));
 
 /**
- * LÓGICA DE TERMINOS Y CONDICIONES (BLOQUEO)
+ * LÓGICA DE TÉRMINOS Y CONDICIONES (BLOQUEO Y MODAL)
  */
+const cruzCerrar = document.getElementById('cerrarCruz');
 const checkboxTerminos = document.querySelector('input[type="checkbox"]');
 const modalTerminos = document.getElementById('modalTerminos');
 const modalExito = document.getElementById('modalExito');
@@ -52,25 +53,34 @@ function desactivarFormulario() {
     });
 }
 
-// Bloqueo inicial
+// Función unificada para cerrar el reglamento y habilitar el registro
+function aceptarYCerrarTerminos() {
+    modalTerminos.style.display = "none";
+    checkboxTerminos.checked = true;
+    activarFormulario();
+}
+
+// Bloqueo inicial del formulario
 desactivarFormulario();
 
-// Abrir modal de términos
+// Abrir modal al hacer clic en el enlace de "Términos y Condiciones"
 document.querySelector('a[href="#"]').addEventListener('click', (e) => {
     e.preventDefault();
     modalTerminos.style.display = "block";
 });
 
+// Abrir modal si el usuario intenta marcar el checkbox directamente
 checkboxTerminos.addEventListener('change', () => {
-    if (checkboxTerminos.checked) modalTerminos.style.display = "block";
-    else desactivarFormulario();
+    if (checkboxTerminos.checked) {
+        modalTerminos.style.display = "block";
+    } else {
+        desactivarFormulario();
+    }
 });
 
-btnCerrarTerminos.addEventListener('click', () => {
-    modalTerminos.style.display = "none";
-    checkboxTerminos.checked = true;
-    activarFormulario();
-});
+// Asignación de eventos de cierre (Botón y Cruz)
+if (btnCerrarTerminos) btnCerrarTerminos.onclick = aceptarYCerrarTerminos;
+if (cruzCerrar) cruzCerrar.onclick = aceptarYCerrarTerminos;
 
 /**
  * UTILIDADES Y ENVÍO CON PROGRESO
@@ -89,13 +99,12 @@ document.getElementById('estudios').addEventListener('change', (e) => {
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Referencias a la barra de progreso
     const containerProgreso = document.getElementById('containerProgreso');
     const barra = document.getElementById('barra');
     const textoPorcentaje = document.getElementById('porcentaje');
     const btnSubmit = form.querySelector('button[type="submit"]');
 
-    // Validación de archivos obligatorios
+    // Validación de archivos obligatorios antes de procesar
     const fileJpg = document.getElementById('fileJpg').files[0];
     const fileVec = document.getElementById('fileVector').files[0];
     const filePdf = document.getElementById('filePdf').files[0];
@@ -109,11 +118,10 @@ form.addEventListener('submit', async (e) => {
         btnSubmit.disabled = true;
         containerProgreso.style.display = 'block';
 
-        // Recopilar datos base
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
 
-        // Procesamiento de archivos con actualización de barra (Simulada por pasos)
+        // Simulación de progreso mediante procesamiento de archivos
         barra.style.width = "20%"; textoPorcentaje.innerText = "20%";
         data.fileJpg = await toBase64(fileJpg);
         
@@ -126,7 +134,6 @@ form.addEventListener('submit', async (e) => {
 
         barra.style.width = "80%"; textoPorcentaje.innerText = "Enviando...";
 
-        // Petición al servidor
         const response = await fetch('https://script.google.com/macros/s/AKfycby9muvBY602QIlairDCmVN0jsC-RGjxq3qmbqeMG1G9azbBf0IjW-qF5465ZkQiVo-Q/exec', {
             method: 'POST',
             body: JSON.stringify(data)
@@ -151,9 +158,9 @@ form.addEventListener('submit', async (e) => {
  */
 btnCerrarExito.addEventListener('click', () => {
     modalExito.style.display = 'none';
-    form.reset(); // Vacía el formulario
+    form.reset(); 
     document.getElementById('containerProgreso').style.display = 'none';
     document.getElementById('barra').style.width = "0%";
     document.getElementById('seccionEstudios').style.display = 'none';
-    desactivarFormulario(); // Vuelve a bloquear hasta aceptar términos
+    desactivarFormulario(); 
 });
